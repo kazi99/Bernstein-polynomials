@@ -1,29 +1,117 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper]{amsart}
+% \documentclass[a4paper,11pt]{article}
+
 \usepackage[slovene]{babel}
-\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 \usepackage{lmodern}
+
+\usepackage{textcase}
 \usepackage{amsmath}
 \usepackage{amsfonts}
-\usepackage{graphicx}
-\usepackage{float}
+\usepackage{amsthm}
+\usepackage{fancyhdr}
 
-\setlength{\parindent}{0mm}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\thepage}
+\lhead{\textsc{Bernsteinovi polinomi in Weierstrassov izrek}}
 
-\newcounter{countDefinicija}
-\newenvironment{definicija}
-    {\flushleft 
-    \stepcounter{countDefinicija}
-    \textbf{Definicija 
-    \arabic{countDefinicija} :}
+
+{
+\theoremstyle{theorem}
+\newtheorem{izrek}{Izrek}[section]
+\newtheorem{lema}[izrek]{Lema}
+\newtheorem{posledica}[izrek]{Posledica}
+}
+
+{
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}[section]
+\newtheorem*{zgled*}{Zgled}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
-	\begin{center}
-		\LARGE{\textbf{Bernsteinovi polinomi in Weierstrassov aproksimacijski izrek}}
-	\end{center}
+\title{Bernsteinovi polinomi in Weierstrassov aproksimacijski izrek}
+\author{Izak Jenko}
+% \address{FMF}
+% \date{marec 2020}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+	V tem članku bomo spoznali enega izmed prvih konstruktivnih dokazov 
+	\emph{Weierstrassovega aproksimacijskega izreka}, ki pravi da lahko vsako zvezno 
+	funkcijo na zaprtem intervalu poljubno dobro enakomerno aproksimiramo s polinomom. 
+	Definirali bomo posebno vrsto polinomov t.~i. \emph{Bernsteinove polinome}, si ogledali
+	njihove lastnosti in z njimi dokazali Weierstrassov izrek.
+\end{abstract}
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\CIR}{\mathcal{C}([0,1],\RR)}
+
+\section{Uvod}
+
+Preden se lotimo definicije Bernsteinovih polinomov in dokazovanja Weierstrassovega
+izreka, povejmo nekaj besed o prosotru, ki ga bomo obranavali ter normi, ki bo
+določila metriko na tem prostoru. Iz razlogov, ki jih bomo razjasnili pozneje, se bomo
+osredotočili na prostor $\mathcal{C}([0,1],\mathbb{R})$ in supremum normo
+$\|f\|_{\infty} =$ $\sup \{|f(x)|\mid x \in [0,1]\}$ na njem. Vemo že, da ta norma porodi 
+supremum metriko $d_{\infty}(f, g) = sup \{|f(x) - g(x)| \mid x \in [0,1]\}$, 
+za katero velja, da na kompaktnem intervalu $[0,1]$ zaporedje zveznih funkcij 
+$(f_n)_{n \in \NN} \subset \CIR$ enakomerno konvergira k neki zvezni funkciji $f \in \CIR$
+natanko tedaj ko to zaporedje $(f_n)_{n \in \NN}$ konvergira proti $f$ v metriki $d_\infty$.
+Natanko to dejstvo bomo uporabili pri dokazu Weierstrassovega izreka.
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+\begin{definicija}[Brokoli]
+	To je definicija
+\end{definicija}
+
+\begin{lema}
+	To je lema
+\end{lema}
+
+\begin{izrek}
+	Drugi izrek
+\end{izrek}
+
+\begin{izrek}[\textbf{Weierstrassov izrek}]
+	Prvi izrek
+\end{izrek}
+
+\begin{lema}
+	Druga lema
+\end{lema}
+
+\begin{izrek}
+	Tretji izrek
+\end{izrek}
+
+\begin{zgled*}
+	$1 + 1 = 0$, če $\text{char}(K) = 2$
+\end{zgled*}
+
+\begin{posledica}
+	p
+\end{posledica}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+j
 
 \end{document}
