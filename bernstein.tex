@@ -17,11 +17,13 @@
 \rhead{\thepage}
 \lhead{\textsc{Bernsteinovi polinomi in Weierstrassov izrek}}
 
+\setlength{\parskip}{1em}
 
 {
 \theoremstyle{theorem}
 \newtheorem{izrek}{Izrek}[section]
 \newtheorem{lema}[izrek]{Lema}
+\newtheorem{trditev}[izrek]{Trditev}
 \newtheorem{posledica}[izrek]{Posledica}
 }
 
@@ -29,6 +31,7 @@
 \theoremstyle{definition}
 \newtheorem{definicija}{Definicija}[section]
 \newtheorem*{zgled*}{Zgled}
+\newtheorem*{opomba*}{Opomba}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -54,29 +57,98 @@
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\CIR}{\mathcal{C}([0,1],\RR)}
+\newcommand{\dinf}{d_{\infty}}
 
 \section{Uvod}
 
 Preden se lotimo definicije Bernsteinovih polinomov in dokazovanja Weierstrassovega
 izreka, povejmo nekaj besed o prosotru, ki ga bomo obranavali ter normi, ki bo
 določila metriko na tem prostoru. Iz razlogov, ki jih bomo razjasnili pozneje, se bomo
-osredotočili na prostor $\mathcal{C}([0,1],\mathbb{R})$ in supremum normo
-$\|f\|_{\infty} =$ $\sup \{|f(x)|\mid x \in [0,1]\}$ na njem. Vemo že, da ta norma porodi 
-supremum metriko $d_{\infty}(f, g) = sup \{|f(x) - g(x)| \mid x \in [0,1]\}$, 
-za katero velja, da na kompaktnem intervalu $[0,1]$ zaporedje zveznih funkcij 
-$(f_n)_{n \in \NN} \subset \CIR$ enakomerno konvergira k neki zvezni funkciji $f \in \CIR$
-natanko tedaj ko to zaporedje $(f_n)_{n \in \NN}$ konvergira proti $f$ v metriki $d_\infty$.
-Natanko to dejstvo bomo uporabili pri dokazu Weierstrassovega izreka.
+osredotočili na prostor $\mathcal{C}([0,1],\mathbb{R})$, to je prostor vseh zveznih
+funkcij $f: [0,1] \to \RR$, in supremum normo
+$$\|f\|_{\infty} := \sup \{|f(x)|\mid x \in [0,1]\}$$ 
+na njem. Vemo že, da ta norma porodi supremum metriko 
+$$\dinf (f, g) = \sup_{x \in [0,1]} |f(x) - g(x)| \text{,}$$ 
+za katero velja, da na kompaktnem intervalu $[0,1]$ poljubno zaporedje zveznih funkcij 
+$(f_n)_{n \in \NN} \subset \CIR$ enakomerno konvergira k neki zvezni funkciji 
+$f$ iz prostora $\CIR$
+natanko tedaj, ko to zaporedje $(f_n)_{n \in \NN}$ konvergira proti $f$ v metriki $\dinf$.
+Ravno to dejstvo pa bomo uporabili pri dokazu Weierstrassovega izreka. 
+\par
+Posvetimo sedaj še nekaj pozornosti samemu pojmu aproksimacije ter se začasno usmerimo
+na malce bolj splošne prostore. Naj bo $(X, d)$ poljuben metričen prostor in $A \subseteq X$
+takšna podmnožica, za katero lahko povemo, da za poljuben $\epsilon > 0$ in vsak $x \in X$ 
+obstaja v $A$ takšna točka $a \in A$, da je $$d(a, x) < \epsilon\text{.}$$ Lastnost množice
+$A$ je tedaj ravno ta, da je mogoče vsako točko $x \in X$ poljubno dobro aproksimirati
+z nekim elementom iz $A$. Pravzaprav takrat za to lastnost rečemo, da je množica $A$
+povsod gosta v $X$. 
 
+% Sedaj pa si poglejmo primer konstrukcije posebnih polinomov, ki smo jih sicer že srečali
+% pri Algebri 1, vendar pa bomo vildeli, da ne bodo služili kot dobra aproksimacija
+% neke zvezne funkcije. Govorimo seveda o Lagrangevi interpolaciji.
 
+\section{Bernsteinovi polinomi}
 
+V tem poglavju bomo začeli z definicijo Bernsteinovih baznih polinomov in zanje
+dokazali nekaj zanimivih lastnosti, pozneje pa bomo definirali Bernsteinov polinom
+$n$-te stopnje pripadajoč zvezni neki funkciji $f \in \CIR$.
 
+\begin{definicija}[\textbf{Bernsteinovi bazni polinomi}]
+	Bernsteinov bazni polinom $n$-te stopnje za poljuben $k \in \{0,1,\dots,n\}$ 
+	je
+	$$ b_{k, n}(x) = \binom nk x^k(1 - x)^{n - k}\text{.}$$
+\end{definicija}
+	
+\begin{zgled*}
+	Prvih nekaj Bernsteinovih baznih polinomov do tretje stopnje.
+	\begin{align*}
+		b_{0,0}(x) &= 1          & b_{0,1}(x) &= 1 - x       \\
+							 &             & b_{1,1}(x) &= x  		     \\
+							 &  					 & 					  &              \\
+	  b_{0,2}(x) &= (1 - x)^2  & b_{0,3}(x) &= (1 - x)^3   \\
+		b_{1,2}(x) &= 2x(1 - x)  & b_{1,3}(x) &= 3x(1 - x)^2 \\
+		b_{2,2}(x) &= x^2        & b_{2,3}(x) &= 3x^2(1 - x) \\
+							 &             & b_{3,3}(x) &= (1 - x)^3   
+	\end{align*}
+\end{zgled*}
 
+\begin{trditev}
+	Bernsteinovi bazni polinomi $n$-te stopnje $\{b_{k,n}\}_{0 \leq k \leq n}$
+	tvorijo bazo $(n+1)$-dimenzionalnega realnega vetorskega prostora polinomov 
+	največ $n$-te stopnje $\RR_n[X]$ za poljubno naravno število $n \in \NN$.
+\end{trditev}
 
+\begin{proof}
+	Vemo že, da je $\{1, x, x^2, \dots, x^n\}$ baza vektorskega prostora $\RR_n[X]$.
+	Vidimo tudi, da je moč množice $\{b_{i,n}\}_{0 \leq i \leq n}$ enaka $n + 1$,
+	torej bo dovolj če pokažemo, da lahko vsako potenco $x^k$ za $0 \leq k \leq n$
+	izrazimo kot linearno kombinacjo Bernsteinovih baznih polinomov. Za poljuben 
+	$k \in \{0, \dots, n\}$ velja namreč
+
+	$$ x^k = \sum_{i = k}^{n} \frac{\binom ik}{\binom nk} b_{i, n}(x)\text{.}$$
+
+	Preverimo to enačbo z računom.
+
+	\begin{align*}
+	x^k &= x^k(x + (1 - x))^{n - k} \\
+	&= x^k \sum_{i = 0}^{n - k} \binom{n - k}{i} x^i(1 - x)^{n - k - i} \\
+	&= \sum_{i = 0}^{n - k} \binom{n - k}{i} x^{k + i}(1 - x)^{n - k - i} \\
+	&= \sum_{i = k}^{n} \binom{n - k}{i - k} x^i(1 - x)^{n - i} \\
+	&= \sum_{i = k}^{n} \frac{\binom ik}{\binom nk} \binom ni x^i(1 - x)^{n - i} \\
+	&= \sum_{i = k}^{n} \frac{\binom ik}{\binom nk} b_{i, n}(x)\text{.}
+	\end{align*}
+
+kjer smo uporabili zvezo\footnote{ Velja zveza 
+	$ \frac{\binom ik}{\binom nk} \binom ni = 
+\frac{i!}{k!(i - k)!} \frac{k! (n - k)!}{n!} \frac{n!}{i!(n - i)!} = 
+\frac{(n - k)!}{(n - i)!(i - k)!} = \binom{n - k}{i - k}$
+}
+\end{proof}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
+\section{Weierstrassov aproksimacijski izrek}
 
 \begin{definicija}[Brokoli]
 	To je definicija
@@ -109,6 +181,20 @@ Natanko to dejstvo bomo uporabili pri dokazu Weierstrassovega izreka.
 \begin{posledica}
 	p
 \end{posledica}
+
+\begin{zgled*}
+	Prvih nekaj Bernsteinovih baznih polinomov do tretje stopnje.
+		\begin{align*}
+			b_{0,0}(x) &= 1\text{,}          &             &               
+			&             &               &             &  \\
+			b_{0,1}(x) &= 1 - x\text{,}      &  b_{1,1}(x) &= x\text{,}            
+			&             &               &             &  \\
+			b_{0,2}(x) &= (1 - x)^2\text{,}  &  b_{1,2}(x) &= 2x(1 - x)\text{,}    
+			&  b_{2,2}(x) &= x^2\text{,}          &             &  \\ 
+			b_{0,3}(x) &= (1 - x)^3\text{,}  &  b_{1,3}(x) &= 3x(1 - x)^2\text{,}  
+			&  b_{2,3}(x) &= 3x^2(1 - x)\text{,}  &  b_{3,3}(x) &= (1 - x)^3\text{.}
+		\end{align*}
+	\end{zgled*}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
