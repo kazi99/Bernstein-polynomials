@@ -108,7 +108,7 @@ $n$-te stopnje pripadajoč zvezni neki funkciji $f \in \CIR$.
 	  b_{0,2}(x) &= (1 - x)^2  & b_{0,3}(x) &= (1 - x)^3   \\
 		b_{1,2}(x) &= 2x(1 - x)  & b_{1,3}(x) &= 3x(1 - x)^2 \\
 		b_{2,2}(x) &= x^2        & b_{2,3}(x) &= 3x^2(1 - x) \\
-							 &             & b_{3,3}(x) &= (1 - x)^3   
+							 &             & b_{3,3}(x) &= x^3   
 	\end{align*}
 \end{zgled*}
 
@@ -144,6 +144,26 @@ kjer smo uporabili zvezo\footnote{ Velja zveza
 \frac{(n - k)!}{(n - i)!(i - k)!} = \binom{n - k}{i - k}$
 }
 \end{proof}
+
+\begin{trditev}
+	Bernsteinovi bazni polinomi stopnje $n$ tvorijo razčlenitev enote.
+
+	$$ \sum_{k=0}^{n}b_{k, n}(x) \equiv 1$$
+
+\end{trditev}
+
+\begin{proof}
+	Trditev enostavno preverimo z uporabo binomskega izreka in definicije 
+	Bernsteinovih baznih polinomov.
+
+	$$ \sum_{k=0}^{n}b_{k, n}(x) = 
+	\sum_{k=0}^{n} \binom nk x^k(1 - x)^{n - k} = 
+	(x + (1 - x))^n = 
+	1$$
+
+\end{proof}
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
