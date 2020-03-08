@@ -66,9 +66,11 @@ izreka, povejmo nekaj besed o prosotru, ki ga bomo obranavali ter normi, ki bo
 določila metriko na tem prostoru. Iz razlogov, ki jih bomo razjasnili pozneje, se bomo
 osredotočili na prostor $\mathcal{C}([0,1],\mathbb{R})$, to je prostor vseh zveznih
 funkcij $f: [0,1] \to \RR$, in supremum normo
-$$\|f\|_{\infty} := \sup \{|f(x)|\mid x \in [0,1]\}$$ 
-na njem. Vemo že, da ta norma porodi supremum metriko 
-$$\dinf (f, g) = \sup_{x \in [0,1]} |f(x) - g(x)| \text{,}$$ 
+$$\|f\|_{\infty} := \sup \{|f(x)|\mid x \in [0,1]\}$$
+na njem. Vemo že, da ta norma porodi supremum metriko
+$$\dinf (f, g) = 
+% \|f - g\|_{\infty} =
+\sup_{x \in [0,1]} |f(x) - g(x)| \text{,}$$
 za katero velja, da na kompaktnem intervalu $[0,1]$ poljubno zaporedje zveznih funkcij 
 $(f_n)_{n \in \NN} \subset \CIR$ enakomerno konvergira k neki zvezni funkciji 
 $f$ iz prostora $\CIR$
@@ -94,7 +96,7 @@ dokazali nekaj zanimivih lastnosti, pozneje pa bomo definirali Bernsteinov polin
 $n$-te stopnje pripadajoč zvezni neki funkciji $f \in \CIR$.
 
 \begin{definicija}[\textbf{Bernsteinovi bazni polinomi}]
-	Bernsteinov bazni polinom $n$-te stopnje za poljuben $k \in \{0,1,\dots,n\}$ 
+	\emph{Bernsteinov bazni polinom $n$-te stopnje} za poljuben $k \in \{0,1,\dots,n\}$ 
 	je
 	$$ b_{k, n}(x) = \binom nk x^k(1 - x)^{n - k}\text{.}$$
 \end{definicija}
@@ -128,24 +130,27 @@ $n$-te stopnje pripadajoč zvezni neki funkciji $f \in \CIR$.
 	$$ x^k = \sum_{i = k}^{n} \frac{\binom ik}{\binom nk} b_{i, n}(x)\text{.}$$
 
 	Preverimo to enačbo z računom.
-
 	\begin{align*}
 	x^k &= x^k(x + (1 - x))^{n - k} \\
 	&= x^k \sum_{i = 0}^{n - k} \binom{n - k}{i} x^i(1 - x)^{n - k - i} \\
 	&= \sum_{i = 0}^{n - k} \binom{n - k}{i} x^{k + i}(1 - x)^{n - k - i} \\
 	&= \sum_{i = k}^{n} \binom{n - k}{i - k} x^i(1 - x)^{n - i} \\
+\intertext{
+	kjer bomo uporabili zvezo\footnotemark
+}
 	&= \sum_{i = k}^{n} \frac{\binom ik}{\binom nk} \binom ni x^i(1 - x)^{n - i} \\
 	&= \sum_{i = k}^{n} \frac{\binom ik}{\binom nk} b_{i, n}(x)\text{.}
 	\end{align*}
 
-kjer smo uporabili zvezo\footnote{ Velja zveza 
+\footnotetext{ Velja zveza
 	$ \frac{\binom ik}{\binom nk} \binom ni = 
-\frac{i!}{k!(i - k)!} \frac{k! (n - k)!}{n!} \frac{n!}{i!(n - i)!} = 
-\frac{(n - k)!}{(n - i)!(i - k)!} = \binom{n - k}{i - k}$
-}
+	\frac{i!}{k!(i - k)!} \frac{k! (n - k)!}{n!} \frac{n!}{i!(n - i)!} = 
+	\frac{(n - k)!}{(n - i)!(i - k)!} = \binom{n - k}{i - k}$
+	}
 \end{proof}
 
 \begin{trditev}
+	\label{razclenitev enote}
 	Bernsteinovi bazni polinomi stopnje $n$ tvorijo razčlenitev enote.
 
 	$$ \sum_{k=0}^{n}b_{k, n}(x) \equiv 1$$
@@ -162,6 +167,53 @@ kjer smo uporabili zvezo\footnote{ Velja zveza
 	1$$
 
 \end{proof}
+
+% mogoče še kakšne irelevantne posledice če bo treba 
+
+\begin{definicija}
+	\emph{Bernsteinov $n$-ti polinom} poljubne zvezne funkcije $f \in \CIR$ je
+	$$ B_n(x, f) := \sum_{k = 0}^n f\left(\frac kn\right)b_{k,n}(x)\text{.}$$
+
+\end{definicija}
+
+\begin{lema}
+	Naj bosta $f, g \in \CIR$ poljubni zvezni funkciji za kateri velja $f \leq g$, potem za
+	njuna Bernsteinova polinoma poljubne stopnje $n$ velja
+
+	$$ B_n(\text{- },f) \leq B_n(\text{- },g)\text{.}$$ 
+\end{lema}
+
+\begin{proof}
+	Ker za poljuben $x \in [0,1]$ velja $f(x) \leq g(x)$, bo tudi za vsak $k \in \{0,1,\dots, n\}$
+	veljalo
+	$$ f\left(\frac kn\right) \leq g\left(\frac kn\right)\text{.}$$
+	Uporabimo to v računu
+
+	$$ B_n(x, f) = \sum_{k = 0}^n f\left(\frac kn\right)b_{k,n}(x) \leq 
+	\sum_{k = 0}^n g\left(\frac kn\right)b_{k,n}(x) = B_n(x, g)\text{,}$$
+
+	kar pa velja za vsak $x \in [0,1]$.
+\end{proof}
+
+\begin{lema}
+	Naj bo $f \in \CIR$ poljubna zvezna funkcija in $\alpha, \beta \in \RR$ poljubni konstanti.
+	Tedaj za vsak $x \in [0,1]$ velja 
+
+	$$ B_n(x, \alpha \cdot f + \beta) = \alpha B_n(x, f) + \beta\text{.}$$
+\end{lema}
+
+\begin{proof}
+	Enakost preprosto preverimo z računom
+	\begin{multline*}
+	B_n(x, \alpha \cdot f + \beta) = 
+	\sum_{k = 0}^n (\alpha \cdot f + \beta)\left(\frac kn\right)b_{k,n}(x) =\\
+	\alpha \sum_{k = 0}^n f\left(\frac kn\right)b_{k,n}(x) + \beta \sum_{k = 0}^n b_{k,n}(x) =
+	\alpha B_n(x, f) + \beta\text{,}
+\end{multline*}
+
+kjer smo uporabili trditev \ref{razclenitev enote}.
+\end{proof}
+
 
 
 
@@ -215,6 +267,8 @@ kjer smo uporabili zvezo\footnote{ Velja zveza
 			&  b_{2,3}(x) &= 3x^2(1 - x)\text{,}  &  b_{3,3}(x) &= (1 - x)^3\text{.}
 		\end{align*}
 	\end{zgled*}
+
+$ a \cdot b$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
