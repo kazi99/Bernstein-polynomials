@@ -61,6 +61,7 @@
 
 \section{Uvod}
 
+\par
 Preden se lotimo definicije Bernsteinovih polinomov in dokazovanja Weierstrassovega
 izreka, povejmo nekaj besed o prosotru, ki ga bomo obranavali ter normi, ki bo
 določila metriko na tem prostoru. Iz razlogov, ki jih bomo razjasnili pozneje, se bomo
@@ -136,19 +137,24 @@ $n$-te stopnje pripadajoč zvezni neki funkciji $f \in \CIR$.
 	x^k &= x^k(x + (1 - x))^{n - k} \\
 	&= x^k \sum_{i = 0}^{n - k} \binom{n - k}{i} x^i(1 - x)^{n - k - i} \\
 	&= \sum_{i = 0}^{n - k} \binom{n - k}{i} x^{k + i}(1 - x)^{n - k - i} \\
-	&= \sum_{i = k}^{n} \binom{n - k}{i - k} x^i(1 - x)^{n - i} \\
+	&= \sum_{i = k}^{n} \binom{n - k}{i - k} x^i(1 - x)^{n - i} \text{,}\\
 \intertext{
-	kjer bomo uporabili zvezo\footnotemark
+	kjer bomo uporabili zvezo $ \binom{n - k}{i - k} = \frac{(n - k)!}{(i - k)!(n - i)!} =
+	\frac{i!}{k!(i - k)!} \frac{k! (n - k)!}{n!} \frac{n!}{i!(n - i)!} =
+	\frac{\binom ik}{\binom nk} \binom ni $
 }
 	&= \sum_{i = k}^{n} \frac{\binom ik}{\binom nk} \binom ni x^i(1 - x)^{n - i} \\
 	&= \sum_{i = k}^{n} \frac{\binom ik}{\binom nk} b_{i, n}(x)\text{.}
 	\end{align*}
 
-\footnotetext{ Velja zveza
-	$ \frac{\binom ik}{\binom nk} \binom ni = 
-	\frac{i!}{k!(i - k)!} \frac{k! (n - k)!}{n!} \frac{n!}{i!(n - i)!} = 
-	\frac{(n - k)!}{(n - i)!(i - k)!} = \binom{n - k}{i - k}$
-	}
+% \footnotetext{ Velja zveza
+% 	$ \frac{\binom ik}{\binom nk} \binom ni = 
+% 	\frac{i!}{k!(i - k)!} \frac{k! (n - k)!}{n!} \frac{n!}{i!(n - i)!} = 
+% 	\frac{(n - k)!}{(n - i)!(i - k)!} = \binom{n - k}{i - k}$
+% 	}
+% 	$ \binom{n - k}{i - k} = \frac{(n - k)!}{(n - i)!(i - k)!} =
+% 	\frac{i!}{k!(i - k)!} \frac{k! (n - k)!}{n!} \frac{n!}{i!(n - i)!} =
+% 	\frac{\binom ik}{\binom nk} \binom ni $
 \end{proof}
 
 \begin{trditev}
@@ -199,7 +205,7 @@ v dokazu glavnega izreka.
 	$$ B_n(x, f) = \sum_{k = 0}^n f\left(\frac kn\right)b_{k,n}(x) \leq 
 	\sum_{k = 0}^n g\left(\frac kn\right)b_{k,n}(x) = B_n(x, g)\text{,}$$
 
-	kar pa velja za vsak $x \in [0,1]$.
+	ki velja za vsak $x \in [0,1]$.
 \end{proof}
 
 \begin{lema}
@@ -223,11 +229,53 @@ kar velja za vse $x \in [0,1]$, pri čemer pa smo uporabili trditev \ref{razclen
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
 \section{Weierstrassov aproksimacijski izrek}
 
+\begin{izrek}
+	Za poljubno zvezno funkcijo $f: [a, b] \to \RR$ in pojubno natančnost $\epsilon > 0$
+	obstaja polinom $p$ na $[a,b]$ za katerega velja:
 
+	$$ \dinf(f, p) = \sup_{x \in [a, b]} |f(x)-p(x)| < \epsilon\text{.}$$
 
+	Ekvivalentna formulacija, z uporabo Bernsteinovih polinomov:
+
+	Za poljubno zvezno funkcijo $f:[a, b] \to \RR$ zaporedje polinomov 
+	$(B_n(\text{- },f))_{n \in \NN}$ enakomerno konvergira
+	proti $f$ na $[a, b]$ ali:
+
+	$$ \lim_{n\to\infty}B_n(x, f) = f(x)$$
+	
+	enakomerno na $[a,b]$.
+\end{izrek}
+
+\par
+Nekaj let po Bernsteinovem konstruktivističnem dokazu Weierstrassovega
+izreka je posplošitev izreka leta 1937 formuliral in dokazal
+Marshall H. Stone. V izreku je poljuben zaprt interval zamenjal z abstraktnim
+topološkim prostorom $X$ in algebro polinomov s poljubno podalgebro
+topološke algebre zveznih realnih funkcij $\mathcal{C}(X, \RR) = \mathcal{C}(X)$
+opremljene s
+kompaktno odprto topologijo ter nekatermi posebnimi lastnostmi.
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\begin{izrek}[\textbf{Stone--Weierstrassov izrek}] %mrcun
+	Naj bo $X$ topološki prostor in naj bo $A$ podalgebra algebre zveznih
+	realnih funkcij $\mathcal{C}(X)$ na $X$, za katero velja:
+	\begin{enumerate}
+		\item vse konstantne realne funkcije na $X$ so v podalgebri $A$,
+		\item za poljubni točki $x, y \in X\text{,} x \neq y$, obstaja takšna
+					funkcija $f$ iz podalgebre $A$, da je $f(x) \neq f(y)$ (tej
+					lastnosti pravimo tudi, da $A$ loči točke prostora $X$). 
+	\end{enumerate}
+	Tedaj je podalgebra $A$ gosta v $\mathcal{C}(X)$ glede na kompaktno-odprto
+	topologijo.
+\end{izrek}
+
+\par
+Z dokazom tega posplošenega izreka se v tem članku ne bomo ukvarjali, vseeno
+pa bi pokometirali kam v ta izrek sodijo Bernsteinovi polinomi oziroma kako
+bi s tem izrekom kot posledico ali poseben primer dokazali Weierstrassov izrek. 
 
 
 
@@ -290,6 +338,6 @@ $ a \cdot b$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-j
+\texttt{j}j
 
 \end{document}
