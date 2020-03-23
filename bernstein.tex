@@ -219,7 +219,8 @@ v dokazu glavnega izreka.
 	Enakost preprosto preverimo z računom
 	\begin{multline*}
 	B_n(x, \alpha \cdot f + \beta) = 
-	\sum_{k = 0}^n (\alpha \cdot f + \beta)\left(\frac kn\right)b_{k,n}(x) =\\
+	\sum_{k = 0}^n (\alpha \cdot f + \beta)\left( k/n \right)b_{k,n}(x) =\\
+	\sum_{k = 0}^n (\alpha f\left(\frac kn \right) + \beta)b_{k,n}(x) =\\
 	\alpha \sum_{k = 0}^n f\left(\frac kn\right)b_{k,n}(x) + \beta \sum_{k = 0}^n b_{k,n}(x) =
 	\alpha B_n(x, f) + \beta\text{,}
 \end{multline*}
@@ -231,22 +232,59 @@ kar velja za vse $x \in [0,1]$, pri čemer pa smo uporabili trditev \ref{razclen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Weierstrassov aproksimacijski izrek}
 
-\begin{izrek}
+\par
+Prispeli smo do glavnega dela tega članka. Tu bomo formulirali znani Weierstrassov
+izrek, in ga dokazali tako, da bomo najprej pokazali kako iz Bernsteinovega izrek o 
+enakomerni konvergenci izbranega zaporedja Bernsteinovih polinomov sledi 
+Weierstrassov izrek ter nato dokazali še veljavnost prvega. 
+
+\begin{izrek}[\textbf{Weierstrassov aproksimacijski izrek}]
+	\label{Weierstrass}
 	Za poljubno zvezno funkcijo $f: [a, b] \to \RR$ in pojubno natančnost $\epsilon > 0$
+	% pozitivno število ?
 	obstaja polinom $p$ na $[a,b]$ za katerega velja:
 
 	$$ \dinf(f, p) = \sup_{x \in [a, b]} |f(x)-p(x)| < \epsilon\text{.}$$
+	
+\end{izrek}
+	
+Podajmo še Bernsteinov izrek.
 
-	Ekvivalentna formulacija, z uporabo Bernsteinovih polinomov:
-
+\begin{izrek}[\textbf{Bernstein}]
+	\label{Bernsteinov izrek}
 	Za poljubno zvezno funkcijo $f:[a, b] \to \RR$ zaporedje polinomov 
 	$(B_n(\text{- },f))_{n \in \NN}$ enakomerno konvergira
 	proti $f$ na $[a, b]$ ali:
 
 	$$ \lim_{n\to\infty}B_n(x, f) = f(x)$$
-	
+
 	enakomerno na $[a,b]$.
 \end{izrek}
+
+\begin{opomba*}
+	Pokažimo, da iz izreka \ref{Bernsteinov izrek} sledi izrek \ref{Weierstrass}.
+	Izberimo si poljuben $\epsilon > 0$. Ker zaporedje polinomov 
+	$(B_n(\text{- },f))_{n \in \NN}$ enakomerno konvergira na $[a,b]$ obstaja tak 
+	$N \in \NN$, da za vse $x \in [a,b]$ in vse $n \geq N$ velja
+	$$ |B_n(x,f) - f(x)| < \epsilon\text{.}$$
+	Torej po definiciji metrike $\dinf$ za dobljeni $N$ velja
+
+	$$ \dinf(f, B_N(\text{- },f)) < \epsilon \text{,}$$
+
+	kjer je iskani polinom $p$ seveda enak $B_N(\text{- },f)$ in to torej pokaže 
+	Weierstrassov aproksimacijski izrek.
+\end{opomba*}
+
+\begin{proof}[Dokaz \emph{(izrek \ref{Bernsteinov izrek})}]
+
+Najprej utemeljimo, zakaj se je iz splošnega zaprtega intervala $[a,b]$ dovolj
+omejiti na interval $[0,1]$. To lahko storimo, saj je zaradi obstoja homeomorfizma 
+$\phi: [0,1] \to [a,b]$, podanega s prepisom
+$$ \phi(t) = (b - a)t + a \text{, }$$
+možno s kompozicijo $f \circ \phi$ problem prevesti na interval $[0,1]$.
+\end{proof}
+
+\newpage
 
 \par
 Nekaj let po Bernsteinovem konstruktivističnem dokazu Weierstrassovega
@@ -259,12 +297,13 @@ kompaktno odprto topologijo ter nekatermi posebnimi lastnostmi.
 
 \renewcommand{\labelenumi}{(\roman{enumi})}
 
-\begin{izrek}[\textbf{Stone--Weierstrassov izrek}] %mrcun
+\begin{izrek}[\textbf{Stone--Weierstrassov izrek}]
+	\label{Stone} %mrcun
 	Naj bo $X$ topološki prostor in naj bo $A$ podalgebra algebre zveznih
 	realnih funkcij $\mathcal{C}(X)$ na $X$, za katero velja:
 	\begin{enumerate}
 		\item vse konstantne realne funkcije na $X$ so v podalgebri $A$,
-		\item za poljubni točki $x, y \in X\text{,} x \neq y$, obstaja takšna
+		\item za poljubni točki $x, y \in X\text{, če je } x \neq y$, potem obstaja takšna
 					funkcija $f$ iz podalgebre $A$, da je $f(x) \neq f(y)$ (tej
 					lastnosti pravimo tudi, da $A$ loči točke prostora $X$). 
 	\end{enumerate}
@@ -275,10 +314,16 @@ kompaktno odprto topologijo ter nekatermi posebnimi lastnostmi.
 \par
 Z dokazom tega posplošenega izreka se v tem članku ne bomo ukvarjali, vseeno
 pa bi pokometirali kam v ta izrek sodijo Bernsteinovi polinomi oziroma kako
-bi s tem izrekom kot posledico ali poseben primer dokazali Weierstrassov izrek. 
+bi z njimi in s tem izrekom kot posledico ali poseben primer dokazali 
+Weierstrassov izrek. To bomo storili v nasldenjem zgledu.
 
-
-
+\begin{zgled*}
+	Kot zanimivost lahko še za konec na hitro preverimo, da podalgebra Bernsteinovih
+	polinomov zares zadošča predpostavkama (i) in (ii) iz Stoneovega izreka 
+	\ref{Stone}.
+\end{zgled*}
+Stovnovega
+Stone-ovega
 
 
 
