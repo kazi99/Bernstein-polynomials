@@ -1,4 +1,4 @@
-\documentclass[a4paper]{amsart}
+\documentclass[a4paper, reqno]{amsart}
 % \documentclass[a4paper,11pt]{article}
 
 \usepackage[slovene]{babel}
@@ -11,6 +11,8 @@
 \usepackage{amsfonts}
 \usepackage{amsthm}
 \usepackage{fancyhdr}
+\usepackage[italicdiff]{physics}
+% \usepackage{mathabx}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -30,6 +32,7 @@
 {
 \theoremstyle{definition}
 \newtheorem{definicija}{Definicija}[section]
+\newtheorem{primer}[definicija]{Primer}
 \newtheorem*{zgled*}{Zgled}
 \newtheorem*{opomba*}{Opomba}
 }
@@ -177,6 +180,7 @@ $n$-te stopnje pripadajoč zvezni neki funkciji $f \in \CIR$.
 \end{proof}
 
 % mogoče še kakšne irelevantne posledice če bo treba 
+% skor ziher ne bo treba
 
 Sedaj bomo definirali Bernsteinove polinome pripadajoče neki zvezni funkciji, 
 ki jih bomo uporabli pri dokazu Weierstrassovega
@@ -190,6 +194,7 @@ v dokazu glavnega izreka.
 \end{definicija}
 
 \begin{lema}
+	\label{monotonost}
 	Naj bosta $f, g \in \CIR$ poljubni zvezni funkciji za kateri velja $f \leq g$, potem za
 	njuna Bernsteinova polinoma poljubne stopnje $n$ velja
 
@@ -209,6 +214,7 @@ v dokazu glavnega izreka.
 \end{proof}
 
 \begin{lema}
+	\label{linearnost}
 	Naj bo $f \in \CIR$ poljubna zvezna funkcija in $\alpha, \beta \in \RR$ poljubni konstanti.
 	Tedaj za vsak $x \in [0,1]$ velja 
 
@@ -228,15 +234,61 @@ v dokazu glavnega izreka.
 kar velja za vse $x \in [0,1]$, pri čemer pa smo uporabili trditev \ref{razclenitev enote}.
 \end{proof}
 
+% ref na https://www.math.upenn.edu/~kadison/bernstein.pdf 23.3.2020 
+\begin{primer}
+	\label{B polinom primer}
+	Za poljuben $n \in \NN$ izračunajmo $B_n(x, t \mapsto t)$ in $B_n(x, t \mapsto t^2)$. 
+	Po binomskem izreku vemo
+$$
+\pdv{p}\left( \sum_{k=0}^n \binom nk p^k q^{n-k}\right) = \pdv{p}\left((p + q)^n\right) =
+n (p + q)^{n - 1}\text{,}
+$$
+torej, če obe strani pomnožimo s $\frac pn$, dobimo enačbo
+
+\begin{equation}
+	\sum_{k=0}^n \binom nk \frac kn p^k q^{n-k} = (p + q)^{n - 1}p\text{.}
+	\label{eq:prviodvod}
+\end{equation}
+
+Če v to enačbo vstavimo $p = x$ in $q = 1 - x$ dobimo
+$$
+x = \sum_{k=0}^n \binom nk \frac kn x^k (1 - x)^{n-k} = 
+\sum_{k = 0}^n \frac kn b_{k,n}(x) =
+B_n(x, t \mapsto t)\text{.}
+$$
+
+Za izračun $B_n(x, t \mapsto t^2)$ pa ponovno parcialno odvajajmo 
+enačbo~\eqref{eq:prviodvod} in nato obe strani ponovno pomnožimo s $\frac pn$. 
+Tedaj dobimo
+$$
+\sum_{k=0}^n \binom nk \frac {k^2}{n^2} p^k q^{n-k} = 
+\frac {(n - 1)(p + q)^{n - 2}}{n}p^2 + \frac{(p + q)^{n - 1}}{n}p\text{.}
+$$
+Podobno kot prej tudi v to enačbo vstavimo $p = x$ in $q = 1 - x$, zato
+$$
+\frac{(n - 1)x^2}{n} + \frac xn = 
+\sum_{k=0}^n \binom nk \frac {k^2}{n^2} x^k (1 - x)^{n-k} = 
+\sum_{k = 0}^n \frac{k^2}{n^2} b_{k,n}(x) =
+B_n(x, t \mapsto t^2)\text{.}
+$$
+
+Ti dve formuli si je vredno zapomniti, saj ju bomo v naslednjem poglavju uporabili
+pri dokazu Bernsteinovega izreka.
+\end{primer}
+
+% B_n(x, (x - \xi)^2) = \sum_{k = 0}^n (\frac kn - \xi)^2 b_{k,n}(x) =\\
+% \frac {1}{n^2}\sum_{k = 0}^n k^2 b_{k,n}(x) + \frac {2\xi}{n}\sum_{k = 0}^n kb_{k,n}(x) + 
+% \xi^2\sum_{k = 0}^n b_{k,n}(x) =\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Weierstrassov aproksimacijski izrek}
 
 \par
 Prispeli smo do glavnega dela tega članka. Tu bomo formulirali znani Weierstrassov
-izrek, in ga dokazali tako, da bomo najprej pokazali kako iz Bernsteinovega izrek o 
+izrek o enakomerni aproksimaciji zvezne funkcije s polinomi na zaprtem intervalu,
+in ga dokazali tako, da bomo najprej pokazali kako iz Bernsteinovega izrek o 
 enakomerni konvergenci izbranega zaporedja Bernsteinovih polinomov sledi 
-Weierstrassov izrek ter nato dokazali še veljavnost prvega. 
+Weierstrassov izrek, ter nato dokazali še veljavnost prvega. 
 
 \begin{izrek}[\textbf{Weierstrassov aproksimacijski izrek}]
 	\label{Weierstrass}
@@ -268,23 +320,115 @@ Podajmo še Bernsteinov izrek.
 	$N \in \NN$, da za vse $x \in [a,b]$ in vse $n \geq N$ velja
 	$$ |B_n(x,f) - f(x)| < \epsilon\text{.}$$
 	Torej po definiciji metrike $\dinf$ za dobljeni $N$ velja
-
-	$$ \dinf(f, B_N(\text{- },f)) < \epsilon \text{,}$$
-
+	\begin{equation*}
+		\dinf(f, B_N(\text{- },f)) < \epsilon \text{,}
+	\end{equation*}
 	kjer je iskani polinom $p$ seveda enak $B_N(\text{- },f)$ in to torej pokaže 
 	Weierstrassov aproksimacijski izrek.
 \end{opomba*}
 
-\begin{proof}[Dokaz \emph{(izrek \ref{Bernsteinov izrek})}]
+\begin{proof}[Dokaz \emph{izrek \ref{Bernsteinov izrek}}]
 
-Najprej utemeljimo, zakaj se je iz splošnega zaprtega intervala $[a,b]$ dovolj
-omejiti na interval $[0,1]$. To lahko storimo, saj je zaradi obstoja homeomorfizma 
-$\phi: [0,1] \to [a,b]$, podanega s prepisom
+% \par
+% Najprej utemeljimo, zakaj se je iz splošnega zaprtega intervala $[a,b]$ dovolj
+% omejiti na interval $[0,1]$. To lahko storimo, saj je zaradi obstoja homeomorfizma 
+% $\phi: [0,1] \to [a,b]$, podanega s prepisom
+% $$ \phi(t) = (b - a)t + a \text{, }$$
+% možno s kompozicijo $f \circ \phi$ problem prevesti na interval $[0,1]$.
+
+\par
+Izrek bomo dokazali za primer, ko je zaprti interval $[a,b] = [0,1]$. Pa utemeljimo
+zakaj smemo to storiti. Naj bo $g \in \mathcal{C}([a,b],\RR)$ poljubna zvezna funkcija. 
+Definirajmo preslikavo $\phi: [0,1] \to [a,b]$, podano s predpisom
 $$ \phi(t) = (b - a)t + a \text{, }$$
-možno s kompozicijo $f \circ \phi$ problem prevesti na interval $[0,1]$.
-\end{proof}
+ki je očitno homeomorfizem. Tedaj je funkcija $f = g \circ \phi$ zvezna in definirana
+na $[0,1]$. Torej je res dovolj izrek dokazati za poljubno zvezno funkcijo $f \in \CIR$. 
 
-\newpage
+\par
+Naj bo $f : [0,1] \to \RR$ zvezna funkcija. Dokazujemo $\lim_{n\to\infty}B_n(x, f) = f(x)$
+enakomerno na $[0,1]$, zato izberimo poljuben pozitiven $\epsilon > 0$. Najprej
+omenimo nekaj opazk, ki takoj sledijo iz danih prepostavk.
+
+\par
+Ker je $f$ zvezna na zaprtem intervalu, ki je kompokten, je $f$ omejena. %globevnik ref
+Zato obstaja tak $M \in \RR$, vzamemo lahko kar $M = \|f\|_{\infty}$, da na $[0,1]$ velja
+$$ |f| \leq M \text{.}$$
+\par
+Vidimo tudi, da je $f$ enakomerno zvezna, saj je zvezna na zaprtem intervalu $[0,1]$.
+%globevnik ref
+Tedaj za naš zgoraj izbrani $\epsilon > 0$ obstaja tak $\delta > 0$, da za vsaka 
+$x, y \in [0,1]$ velja
+\begin{equation}
+	\label{eq:enak.zv.}
+	|x - y| < \delta \implies |f(x) - f(y)| < \frac{\epsilon}{2}\text{.}
+\end{equation}
+
+\par
+Izberimo si sedaj poljuben $\xi \in [0,1]$. Zaradi zveznosti $f$ tedaj za vsak
+$x \in [0,1]$, za katere ga velja $|x - \xi| < \delta$, velja tudi 
+$|f(x) - f(\xi)| < \frac{\epsilon}{2}$. Sicer pa, če imamo tak $x$, da je
+$|x - \xi| \geq \delta$, v tem primeru je $|x - \xi|/\delta \geq 1$, dobimo
+\begin{equation}
+	\label{eq:druga moznost}
+	|f(x) - f(\xi)| \leq 2M \leq 2M\left(\frac{|x - \xi|^2}{\delta^2}\right) <
+	2M\left(\frac{x - \xi}{\delta}\right)^2 + \frac{\epsilon}{2}\text{.}
+\end{equation}
+
+Zdaj združimo neenakosti \eqref{eq:enak.zv.} in \eqref{eq:druga moznost},
+in dobimo, da za vsak $x \in [0,1]$ velja
+
+\begin{equation}
+	\label{eq:f neenakost}
+	|f(x) - f(\xi)| < 2M\left( \frac{x - \xi}{\delta}\right)^2 + \frac{\epsilon}{2}\text{.}
+\end{equation}
+
+V naslednji račun bomo vpeljali Bernsteinove polinome, ki pa bodo zaenkrat še
+nedoločene stopnje $n$, kateri bomo pozneje podali dodatne omejitve. Po lemah 
+\ref{linearnost} in \ref{monotonost}, ki govorita o linearnosi in monotonosti 
+Bernsteinovih polinomov v drugem argumentu, dobimo
+\begin{align*}
+	|B_(x, f) - f(\xi)| &= |B_n(x, f - f(\xi))|\\
+	&\leq B_n(x, |f - f(\xi)|)\text{,}\\
+\intertext{
+		saj je $f - f(\xi) \leq |f - f(\xi)|$. In ker velja \eqref{eq:f neenakost}, sledi
+}
+	&\leq B_n(x, t \mapsto 2M\left(\frac{t - \xi}{\delta} \right)^2 + \frac{\epsilon}{2})\\
+	&= \frac{2M}{\delta^2}B_n(x, t \mapsto (t - \xi)^2) + \frac{\epsilon}{2}\text{,}
+\end{align*}
+kjer smo v prvem in zadnjem koraku uporabili lemo \ref{linearnost} in v drugem ter
+tretjem lemo \ref{monotonost}. Iz primera \ref{B polinom primer} lahko izračunamo
+\begin{align*}
+	B_n(x, t \mapsto (t - \xi)^2) &= 
+	B_n(x, t \mapsto t^2) + 2\xi B_n(x, t \mapsto t) + \xi^2B_n(x, 1) \\
+	&= \frac{(n - 1)x^2}{n} + \frac xn + 2\xi x + \xi^2 \\
+	%&= x^2 + \frac{1}{n}(x - x^2) - 2\xi x + \xi^2 \\
+	&= (x - \xi)^2 + \frac{1}{n}(x - x^2)
+\end{align*}
+Če torej nadaljujemo z oceno in uporabimo zgornjo enakost dobimo
+$$
+|B_n(x, f) - f(\xi)| \leq \frac{2M}{\delta^2}(x - \xi)^2 + 
+\frac{2M}{\delta^2}\frac{1}{n}(x - x^2) + \frac{\epsilon}{2}\text{,}
+$$
+ki velja za vsak $x \in [0,1]$. Če v to enačbo vstavimo $x = \xi$ se ocena spremeni v
+$$
+|B_n(\xi, f) - f(\xi)| \leq  \frac{2M}{n\delta^2}(\xi - \xi^2) + \frac{\epsilon}{2}\text{,}
+$$
+ki pravtako velja za vsak $\xi \in [0,1]$, saj smo na začetku izbrali poljubnega. Hitro
+se prepričamo, da izraz $z - z^2$ na intervalu $[0,1]$ doseže maksimum v $\frac{1}{4}$
+in tako dobimo oceno
+$$
+|B_n(\xi, f) - f(\xi)| \leq \frac{\epsilon}{2} + \frac{M}{2n\delta^2}\text{,}
+$$ 
+ki velja za vse $\xi \in [0,1]$.
+
+\par
+Na tem mestu pa vzemimo $N = \left \lceil{\frac{M}{2n\delta^2}}\right \rceil$, saj
+takrat za vsak $n \geq N$ dobimo
+$$
+\|B_n(\text{- }, f) - f\|_{\infty} < \epsilon\text{,}
+$$
+kar dokaže enakomerno konvergenco zaporedja $(B_n(\text{- },f))_{n \in \NN}$ na $[0,1]$.
+\end{proof}
 
 \par
 Nekaj let po Bernsteinovem konstruktivističnem dokazu Weierstrassovega
@@ -320,10 +464,13 @@ Weierstrassov izrek. To bomo storili v nasldenjem zgledu.
 \begin{zgled*}
 	Kot zanimivost lahko še za konec na hitro preverimo, da podalgebra Bernsteinovih
 	polinomov zares zadošča predpostavkama (i) in (ii) iz Stoneovega izreka 
-	\ref{Stone}.
+	\ref{Stone}. Realno podalgebro Bernsteinovih polinomov lahko zapišemo kot
+	$$
+	\mathcal{B} = \{B_n(\text{- }, f) \mid f \in \CIR, n \in \NN\}\text{.}
+	$$
+	Predpostavki (i) zadostimo ker je $B_1(x, 1) \equiv 1$, predpostavki (ii) pa zato,
+	ker imamo injektiven polinom $B_6(x, t \mapsto t) \equiv x$ in ta vedno loči točke.
 \end{zgled*}
-Stovnovega
-Stone-ovega
 
 
 
@@ -332,6 +479,9 @@ Stone-ovega
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Testi}
+
+Stone-ovega
+Stovnovega
 
 \begin{definicija}[Brokoli]
 	To je definicija
@@ -381,8 +531,8 @@ Stone-ovega
 
 $ a \cdot b$
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
 \texttt{j}j
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \end{document}
