@@ -149,7 +149,7 @@ $n$-te stopnje pripadajoč zvezni neki funkciji $f \in \CIR$.
 	&= \sum_{i = k}^{n} \frac{\binom ik}{\binom nk} \binom ni x^i(1 - x)^{n - i} \\
 	&= \sum_{i = k}^{n} \frac{\binom ik}{\binom nk} b_{i, n}(x)\text{.}
 	\end{align*}
-
+\end{proof}
 % \footnotetext{ Velja zveza
 % 	$ \frac{\binom ik}{\binom nk} \binom ni = 
 % 	\frac{i!}{k!(i - k)!} \frac{k! (n - k)!}{n!} \frac{n!}{i!(n - i)!} = 
@@ -158,7 +158,6 @@ $n$-te stopnje pripadajoč zvezni neki funkciji $f \in \CIR$.
 % 	$ \binom{n - k}{i - k} = \frac{(n - k)!}{(n - i)!(i - k)!} =
 % 	\frac{i!}{k!(i - k)!} \frac{k! (n - k)!}{n!} \frac{n!}{i!(n - i)!} =
 % 	\frac{\binom ik}{\binom nk} \binom ni $
-\end{proof}
 
 \begin{trditev}
 	\label{razclenitev enote}
@@ -176,7 +175,6 @@ $n$-te stopnje pripadajoč zvezni neki funkciji $f \in \CIR$.
 	\sum_{k=0}^{n} \binom nk x^k(1 - x)^{n - k} = 
 	(x + (1 - x))^n = 
 	1$$
-
 \end{proof}
 
 % mogoče še kakšne irelevantne posledice če bo treba 
@@ -184,7 +182,7 @@ $n$-te stopnje pripadajoč zvezni neki funkciji $f \in \CIR$.
 
 Sedaj bomo definirali Bernsteinove polinome pripadajoče neki zvezni funkciji, 
 ki jih bomo uporabli pri dokazu Weierstrassovega
-izrek, poleg tega pa bomo dokazali še nekaj lem, ki se bodo pravtako izkazale za koristne
+izreka, poleg tega pa bomo dokazali še nekaj lem, ki se bodo pravtako izkazale za koristne
 v dokazu glavnega izreka. 
 
 \begin{definicija}
@@ -226,11 +224,10 @@ v dokazu glavnega izreka.
 	\begin{multline*}
 	B_n(x, \alpha \cdot f + \beta) = 
 	\sum_{k = 0}^n (\alpha \cdot f + \beta)\left( k/n \right)b_{k,n}(x) =\\
-	\sum_{k = 0}^n (\alpha f\left(\frac kn \right) + \beta)b_{k,n}(x) =\\
-	\alpha \sum_{k = 0}^n f\left(\frac kn\right)b_{k,n}(x) + \beta \sum_{k = 0}^n b_{k,n}(x) =
+	= \sum_{k = 0}^n (\alpha f\left(\frac kn \right) + \beta)b_{k,n}(x) =\\
+	= \alpha \sum_{k = 0}^n f\left(\frac kn\right)b_{k,n}(x) + \beta \sum_{k = 0}^n b_{k,n}(x) =
 	\alpha B_n(x, f) + \beta\text{,}
 \end{multline*}
-
 kar velja za vse $x \in [0,1]$, pri čemer pa smo uporabili trditev \ref{razclenitev enote}.
 \end{proof}
 
@@ -288,13 +285,13 @@ Prispeli smo do glavnega dela tega članka. Tu bomo formulirali znani Weierstras
 izrek o enakomerni aproksimaciji zvezne funkcije s polinomi na zaprtem intervalu,
 in ga dokazali tako, da bomo najprej pokazali kako iz Bernsteinovega izreka o 
 enakomerni konvergenci izbranega zaporedja Bernsteinovih polinomov sledi 
-Weierstrassov izrek, ter nato dokazali še veljavnost prvega. 
+Weierstrassov izrek, ter nato dokazali še resničnost prvega. 
 
 \begin{izrek}[\textbf{Weierstrassov aproksimacijski izrek}]
 	\label{Weierstrass}
 	Za poljubno zvezno funkcijo $f: [a, b] \to \RR$ in poljubno natančnost $\epsilon > 0$
 	% pozitivno število ?
-	obstaja polinom $p$ na $[a,b]$ za katerega velja:
+	obstaja polinom $p$ na $[a,b]$ za katerega velja
 
 	$$ \dinf(f, p) = \sup_{x \in [a, b]} |f(x)-p(x)| < \epsilon\text{.}$$
 	
@@ -306,7 +303,7 @@ Podajmo še Bernsteinov izrek.
 	\label{Bernsteinov izrek}
 	Za poljubno zvezno funkcijo $f:[a, b] \to \RR$ zaporedje polinomov 
 	$(B_n(\text{- },f))_{n \in \NN}$ enakomerno konvergira
-	proti $f$ na $[a, b]$ ali:
+	proti $f$ na $[a, b]$ oziroma
 
 	$$ \lim_{n\to\infty}B_n(x, f) = f(x)$$
 
@@ -316,7 +313,7 @@ Podajmo še Bernsteinov izrek.
 \begin{opomba*}
 	Pokažimo, da iz izreka \ref{Bernsteinov izrek} sledi izrek \ref{Weierstrass}.
 	Izberimo si poljuben $\epsilon > 0$. Ker zaporedje polinomov 
-	$(B_n(\text{- },f))_{n \in \NN}$ enakomerno konvergira na $[a,b]$ obstaja tak 
+	$(B_n(\text{- },f))_{n \in \NN}$ enakomerno konvergira na $[a,b]$, obstaja tak 
 	$N \in \NN$, da za vse $x \in [a,b]$ in vse $n \geq N$ velja
 	$$ |B_n(x,f) - f(x)| < \epsilon\text{.}$$
 	Torej po definiciji metrike $\dinf$ za dobljeni $N$ velja
@@ -347,7 +344,7 @@ na $[0,1]$. Torej je res dovolj izrek dokazati za poljubno zvezno funkcijo $f \i
 \par
 Naj bo $f : [0,1] \to \RR$ zvezna funkcija. Dokazujemo $\lim_{n\to\infty}B_n(x, f) = f(x)$
 enakomerno na $[0,1]$, zato izberimo poljuben pozitiven $\epsilon > 0$. Najprej
-omenimo nekaj opazk, ki takoj sledijo iz danih prepostavk.
+omenimo nekaj opazk, ki takoj sledijo iz danih predpostavk.
 
 \par
 Ker je $f$ zvezna na zaprtem intervalu, ki je kompakten, je $f$ omejena. %globevnik ref
@@ -399,8 +396,8 @@ kjer smo v prvem in zadnjem koraku uporabili lemo \ref{linearnost} in v drugem t
 tretjem lemo \ref{monotonost}. Iz primera \ref{B polinom primer} lahko izračunamo
 \begin{align*}
 	B_n(x, t \mapsto (t - \xi)^2) &= 
-	B_n(x, t \mapsto t^2) + 2\xi B_n(x, t \mapsto t) + \xi^2B_n(x, 1) \\
-	&= \frac{(n - 1)x^2}{n} + \frac xn + 2\xi x + \xi^2 \\
+	B_n(x, t \mapsto t^2) - 2\xi B_n(x, t \mapsto t) + \xi^2B_n(x, 1) \\
+	&= \frac{(n - 1)x^2}{n} + \frac xn - 2\xi x + \xi^2 \\
 	%&= x^2 + \frac{1}{n}(x - x^2) - 2\xi x + \xi^2 \\
 	&= (x - \xi)^2 + \frac{1}{n}(x - x^2)
 \end{align*}
