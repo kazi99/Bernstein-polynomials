@@ -12,6 +12,9 @@
 \usepackage{amsthm}
 \usepackage{fancyhdr}
 \usepackage[italicdiff]{physics}
+\usepackage{url}
+% \usepackage{hyperref}
+% \usepackage{biblatex}
 % \usepackage{mathabx}
 
 \pagestyle{fancy}
@@ -89,12 +92,8 @@ $A$ je tedaj ravno ta, da je mogoče vsako točko $x \in X$ poljubno dobro aprok
 z nekim elementom iz $A$. Pravzaprav takrat za to lastnost rečemo, da je množica $A$
 povsod gosta v $X$. 
 
-% Sedaj pa si poglejmo primer konstrukcije posebnih polinomov, ki smo jih sicer že srečali
-% pri Algebri 1, vendar pa bomo vildeli, da ne bodo služili kot dobra aproksimacija
-% neke zvezne funkcije. Govorimo seveda o Lagrangevi interpolaciji.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Bernsteinovi polinomi}
 
 V tem poglavju bomo začeli z definicijo Bernsteinovih baznih polinomov in zanje
@@ -150,14 +149,6 @@ $n$-te stopnje pripadajoč zvezni neki funkciji $f \in \CIR$.
 	&= \sum_{i = k}^{n} \frac{\binom ik}{\binom nk} b_{i, n}(x)\text{.}
 	\end{align*}
 \end{proof}
-% \footnotetext{ Velja zveza
-% 	$ \frac{\binom ik}{\binom nk} \binom ni = 
-% 	\frac{i!}{k!(i - k)!} \frac{k! (n - k)!}{n!} \frac{n!}{i!(n - i)!} = 
-% 	\frac{(n - k)!}{(n - i)!(i - k)!} = \binom{n - k}{i - k}$
-% 	}
-% 	$ \binom{n - k}{i - k} = \frac{(n - k)!}{(n - i)!(i - k)!} =
-% 	\frac{i!}{k!(i - k)!} \frac{k! (n - k)!}{n!} \frac{n!}{i!(n - i)!} =
-% 	\frac{\binom ik}{\binom nk} \binom ni $
 
 \begin{trditev}
 	\label{razclenitev enote}
@@ -176,9 +167,6 @@ $n$-te stopnje pripadajoč zvezni neki funkciji $f \in \CIR$.
 	(x + (1 - x))^n = 
 	1$$
 \end{proof}
-
-% mogoče še kakšne irelevantne posledice če bo treba 
-% skor ziher ne bo treba
 
 Sedaj bomo definirali Bernsteinove polinome pripadajoče neki zvezni funkciji, 
 ki jih bomo uporabli pri dokazu Weierstrassovega
@@ -231,9 +219,9 @@ v dokazu glavnega izreka.
 kar velja za vse $x \in [0,1]$, pri čemer pa smo uporabili trditev \ref{razclenitev enote}.
 \end{proof}
 
-% ref na https://www.math.upenn.edu/~kadison/bernstein.pdf 23.3.2020 
 \begin{primer}
 	\label{B polinom primer}
+	\cite{Kadison}
 	Za poljuben $n \in \NN$ izračunajmo $B_n(x, t \mapsto t)$ in $B_n(x, t \mapsto t^2)$. 
 	Po binomskem izreku vemo
 $$
@@ -273,11 +261,8 @@ Ti dve formuli smo izračunali predvsem zato, ker ju bomo v naslednjem poglavju 
 v dokazu Bernsteinovega izreka.
 \end{primer}
 
-% B_n(x, (x - \xi)^2) = \sum_{k = 0}^n (\frac kn - \xi)^2 b_{k,n}(x) =\\
-% \frac {1}{n^2}\sum_{k = 0}^n k^2 b_{k,n}(x) + \frac {2\xi}{n}\sum_{k = 0}^n kb_{k,n}(x) + 
-% \xi^2\sum_{k = 0}^n b_{k,n}(x) =\\
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Weierstrassov aproksimacijski izrek}
 
 \par
@@ -326,13 +311,6 @@ Podajmo še Bernsteinov izrek.
 
 \begin{proof}[Dokaz \emph{izrek \ref{Bernsteinov izrek}}]
 
-% \par
-% Najprej utemeljimo, zakaj se je iz splošnega zaprtega intervala $[a,b]$ dovolj
-% omejiti na interval $[0,1]$. To lahko storimo, saj je zaradi obstoja homeomorfizma 
-% $\phi: [0,1] \to [a,b]$, podanega s prepisom
-% $$ \phi(t) = (b - a)t + a \text{, }$$
-% možno s kompozicijo $f \circ \phi$ problem prevesti na interval $[0,1]$.
-
 \par
 Izrek bomo dokazali za primer, ko je zaprti interval $[a,b] = [0,1]$. Pa utemeljimo
 zakaj smemo to storiti. Naj bo $g \in \mathcal{C}([a,b],\RR)$ poljubna zvezna funkcija. 
@@ -347,12 +325,12 @@ enakomerno na $[0,1]$, zato izberimo poljuben pozitiven $\epsilon > 0$. Najprej
 omenimo nekaj opazk, ki takoj sledijo iz danih predpostavk.
 
 \par
-Ker je $f$ zvezna na zaprtem intervalu, ki je kompakten, je $f$ omejena. %globevnik ref
+Ker je $f$ zvezna na zaprtem intervalu, ki je kompakten, je $f$ omejena \cite[Izrek 30]{Ana1Skripta}.
 Zato obstaja tak $M \in \RR$, vzamemo lahko kar $M = \|f\|_{\infty}$, da na $[0,1]$ velja
 $$ |f| \leq M \text{.}$$
 \par
-Vidimo tudi, da je $f$ enakomerno zvezna, saj je zvezna na zaprtem intervalu $[0,1]$.
-%globevnik ref
+Vidimo tudi, da je $f$ enakomerno zvezna, saj je zvezna na zaprtem intervalu $[0,1]$ 
+\cite[Izrek 28]{Ana1Skripta}.
 Tedaj za naš zgoraj izbrani $\epsilon > 0$ obstaja tak $\delta > 0$, da za vsaka 
 $x, y \in [0,1]$ velja
 \begin{equation}
@@ -439,24 +417,24 @@ kompaktno-odprto topologijo ter nekatermi posebnimi lastnostmi.
 \renewcommand{\labelenumi}{(\roman{enumi})}
 
 \begin{izrek}[\textbf{Stone--Weierstrassov izrek}]
-	\label{Stone} %mrcun
+	\label{Stone}\cite[Izrek 4.28]{MrcunTop}
 	Naj bo $X$ topološki prostor in naj bo $A$ podalgebra algebre zveznih
 	realnih funkcij $\mathcal{C}(X)$ na $X$, za katero velja:
 	\begin{enumerate}
 		\item vse konstantne realne funkcije na $X$ so v podalgebri $A$,
 		\item za poljubni točki $x, y \in X\text{, če je } x \neq y$, potem obstaja takšna
-					funkcija $f$ iz podalgebre $A$, da je $f(x) \neq f(y)$ (tej
-					lastnosti pravimo tudi, da $A$ loči točke prostora $X$). 
+		funkcija $f$ iz podalgebre $A$, da je $f(x) \neq f(y)$ (tej
+		lastnosti pravimo tudi, da $A$ loči točke prostora $X$). 
 	\end{enumerate}
 	Tedaj je podalgebra $A$ gosta v $\mathcal{C}(X)$ glede na kompaktno-odprto
-	topologijo.
+	topologijo. 
 \end{izrek}
 
 \par
 Z dokazom tega posplošenega izreka se v tem članku ne bomo ukvarjali, vseeno
 pa bi pokometirali kam v ta izrek sodijo Bernsteinovi polinomi oziroma kako
 bi z njimi in s tem izrekom kot posledico ali poseben primer dokazali 
-Weierstrassov izrek. To bomo storili v nasledenjem zgledu.
+Weierstrassov izrek. To bomo storili v zadnjem zgledu.
 
 \begin{zgled*}
 	Kot zanimivost lahko še za konec na hitro preverimo, da podalgebra Bernsteinovih
@@ -465,16 +443,27 @@ Weierstrassov izrek. To bomo storili v nasledenjem zgledu.
 	$$
 	\mathcal{B} = \{B_n(\text{- }, f) \mid f \in \CIR, n \in \NN\}\text{.}
 	$$
-	Predpostavki (i) zadostimo ker je $B_1(x, 1) \equiv 1$, predpostavki (ii) pa zato,
+	Predpostavki (i) zadostimo, ker je $B_1(x, 1) \equiv 1$, predpostavki (ii) pa zato,
 	ker imamo injektiven polinom $B_6(x, t \mapsto t) \equiv x$ in ta vedno loči točke.
 \end{zgled*}
 
+\par
+Videli smo torej, da je mogoče in kako se poda eksplicitni predpis za polinom, ki je 
+enakomerni približek poljubne zvezne funkcije na zaprtem intervalu. Izkaže pa se, da
+ta metoda aproksimacije ni precej dobra. To pomeni, da je za dano natančnost potrebno
+podati polinom razmeroma visoke stopnje, oziroma da dano zaporedje Bernsteinovih
+polinomov dokaj počasi konvergira k iskani zvezni funkciji. Iz tega razloga se 
+Bernsteinovi polinomi niso prav zares uveljavili na področju aproksimiranja zveznih 
+funkcij, so pa v svojem času skupaj z dokazom Weierstrassovega izreka izstopili 
+ravno zaradi svoje konstruktivistične narave.  
 % Stone-ovega
 % Stovnovega
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\nocite{*}
 \newpage
-\section{Literatura}
+\bibliographystyle{plain}
+
+\bibliography{literatura}
 
 \end{document}
