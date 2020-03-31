@@ -54,9 +54,9 @@
 
 \begin{abstract}
 	V tem članku bomo spoznali enega izmed prvih konstruktivnih dokazov 
-	\emph{Weierstrassovega aproksimacijskega izreka}, ki pravi da lahko vsako zvezno 
+	\emph{Weierstrassovega aproksimacijskega izreka}, ki pravi, da lahko vsako zvezno 
 	funkcijo na zaprtem intervalu poljubno dobro enakomerno aproksimiramo s polinomom. 
-	Definirali bomo posebno vrsto polinomov t.~i. \emph{Bernsteinove polinome}, si ogledali
+	Definirali bomo posebno vrsto polinomov, t.~i. \emph{Bernsteinove polinome}, si ogledali
 	njihove lastnosti in z njimi dokazali Weierstrassov izrek.
 \end{abstract}
 
@@ -71,26 +71,24 @@
 Preden se lotimo definicije Bernsteinovih polinomov in dokazovanja Weierstrassovega
 izreka, povejmo nekaj besed o prostoru, ki ga bomo obranavali ter normi, ki bo
 določila metriko na tem prostoru. Iz razlogov, ki jih bomo razjasnili pozneje, se bomo
-osredotočili na prostor $\mathcal{C}([0,1],\mathbb{R})$, to je prostor vseh zveznih
-funkcij $f: [0,1] \to \RR$, in supremum normo
+osredotočili na prostor $\mathcal{C}([0,1],\mathbb{R})$. To je prostor vseh zveznih
+funkcij $f: [0,1] \to \RR$, s supremum normo
 $$\|f\|_{\infty} := \sup \{|f(x)|\mid x \in [0,1]\}$$
 na njem. Vemo že, da ta norma porodi supremum metriko
 $$\dinf (f, g) = 
-% \|f - g\|_{\infty} =
 \sup_{x \in [0,1]} |f(x) - g(x)| \text{,}$$
 za katero velja, da na kompaktnem intervalu $[0,1]$ poljubno zaporedje zveznih funkcij 
 $(f_n)_{n \in \NN} \subset \CIR$ enakomerno konvergira k neki zvezni funkciji 
 $f$ iz prostora $\CIR$
 natanko tedaj, ko to zaporedje $(f_n)_{n \in \NN}$ konvergira proti $f$ v metriki $\dinf$.
-Ravno to dejstvo pa bomo uporabili pri dokazu Weierstrassovega izreka. 
+Ravno to dejstvo bomo uporabili pri dokazu Weierstrassovega izreka. 
 \par
-Posvetimo sedaj še nekaj pozornosti samemu pojmu aproksimacije ter se začasno usmerimo
+Posvetimo sedaj še nekaj pozornosti samemu pojmu \emph{aproksimacije} ter se začasno usmerimo
 na malce bolj splošne prostore. Naj bo $(X, d)$ poljuben metričen prostor in $A \subseteq X$
 takšna podmnožica, za katero lahko povemo, da za poljuben $\epsilon > 0$ in vsak $x \in X$ 
 obstaja v $A$ takšna točka $a \in A$, da je $$d(a, x) < \epsilon\text{.}$$ Lastnost množice
 $A$ je tedaj ravno ta, da je mogoče vsako točko $x \in X$ poljubno dobro aproksimirati
-z nekim elementom iz $A$. Pravzaprav takrat za to lastnost rečemo, da je množica $A$
-povsod gosta v $X$. 
+z nekim elementom iz $A$. Rečemo, da je množica $A$ povsod gosta v $X$. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -98,9 +96,10 @@ povsod gosta v $X$.
 
 V tem poglavju bomo začeli z definicijo Bernsteinovih baznih polinomov in zanje
 dokazali nekaj zanimivih lastnosti, pozneje pa bomo definirali Bernsteinov polinom
-$n$-te stopnje pripadajoč zvezni neki funkciji $f \in \CIR$.
+$n$-te stopnje pripadajoč zvezni funkciji $f \in \CIR$.
 
 \begin{definicija}[\textbf{Bernsteinovi bazni polinomi}]
+	\label{B-bazni}
 	\emph{Bernsteinov bazni polinom $n$-te stopnje} za poljuben $k \in \{0,1,\dots,n\}$ 
 	je
 	$$ b_{k, n}(x) = \binom nk x^k(1 - x)^{n - k}\text{.}$$
@@ -129,7 +128,7 @@ $n$-te stopnje pripadajoč zvezni neki funkciji $f \in \CIR$.
 	Vemo že, da je $\{1, x, x^2, \dots, x^n\}$ baza vektorskega prostora $\RR_n[X]$.
 	Vidimo tudi, da je moč množice $\{b_{i,n}\}_{0 \leq i \leq n}$ enaka $n + 1$,
 	torej bo dovolj če pokažemo, da lahko vsako potenco $x^k$ za $0 \leq k \leq n$
-	izrazimo kot linearno kombinacjo Bernsteinovih baznih polinomov. Za poljuben 
+	izrazimo kot linearno kombinacijo Bernsteinovih baznih polinomov. Za poljuben 
 	$k \in \{0, \dots, n\}$ velja namreč
 
 	$$ x^k = \sum_{i = k}^{n} \frac{\binom ik}{\binom nk} b_{i, n}(x)\text{.}$$
@@ -139,23 +138,20 @@ $n$-te stopnje pripadajoč zvezni neki funkciji $f \in \CIR$.
 	x^k &= x^k(x + (1 - x))^{n - k} \\
 	&= x^k \sum_{i = 0}^{n - k} \binom{n - k}{i} x^i(1 - x)^{n - k - i} \\
 	&= \sum_{i = 0}^{n - k} \binom{n - k}{i} x^{k + i}(1 - x)^{n - k - i} \\
-	&= \sum_{i = k}^{n} \binom{n - k}{i - k} x^i(1 - x)^{n - i} \text{,}\\
-\intertext{
-	kjer bomo uporabili zvezo $ \binom{n - k}{i - k} = \frac{(n - k)!}{(i - k)!(n - i)!} =
-	\frac{i!}{k!(i - k)!} \frac{k! (n - k)!}{n!} \frac{n!}{i!(n - i)!} =
-	\frac{\binom ik}{\binom nk} \binom ni $
-}
+	&= \sum_{i = k}^{n} \binom{n - k}{i - k} x^i(1 - x)^{n - i}\\
 	&= \sum_{i = k}^{n} \frac{\binom ik}{\binom nk} \binom ni x^i(1 - x)^{n - i} \\
 	&= \sum_{i = k}^{n} \frac{\binom ik}{\binom nk} b_{i, n}(x)\text{.}
 	\end{align*}
+	Zvezo 
+	$ \binom{n - k}{i - k} = \frac{(n - k)!}{(i - k)!(n - i)!} =
+	\frac{i!}{k!(i - k)!} \frac{k! (n - k)!}{n!} \frac{n!}{i!(n - i)!} =
+	\frac{\binom ik}{\binom nk} \binom ni $ smo uporabili v predzadnji enakosti.
 \end{proof}
 
 \begin{trditev}
 	\label{razclenitev enote}
-	Bernsteinovi bazni polinomi stopnje $n$ tvorijo razčlenitev enote.
-
-	$$ \sum_{k=0}^{n}b_{k, n}(x) \equiv 1$$
-
+	Bernsteinovi bazni polinomi stopnje $n$ tvorijo razčlenitev enote:
+	$$ \sum_{k=0}^{n}b_{k, n}(x) \equiv 1\text{.}$$
 \end{trditev}
 
 \begin{proof}
@@ -164,13 +160,12 @@ $n$-te stopnje pripadajoč zvezni neki funkciji $f \in \CIR$.
 
 	$$ \sum_{k=0}^{n}b_{k, n}(x) = 
 	\sum_{k=0}^{n} \binom nk x^k(1 - x)^{n - k} = 
-	(x + (1 - x))^n = 
-	1$$
+	(x + (1 - x))^n = 1 \text{.}$$
 \end{proof}
 
 Sedaj bomo definirali Bernsteinove polinome pripadajoče neki zvezni funkciji, 
 ki jih bomo uporabli pri dokazu Weierstrassovega
-izreka, poleg tega pa bomo dokazali še nekaj lem, ki se bodo pravtako izkazale za koristne
+izreka, poleg tega pa bomo dokazali še nekaj lem, ki se bodo izkazale za koristne
 v dokazu glavnega izreka. 
 
 \begin{definicija}
@@ -191,11 +186,16 @@ v dokazu glavnega izreka.
 	Ker za poljuben $x \in [0,1]$ velja $f(x) \leq g(x)$, bo tudi za vsak $k \in \{0,1,\dots, n\}$
 	veljalo
 	$$ f\left(\frac kn\right) \leq g\left(\frac kn\right)\text{.}$$
+	Iz definicije \ref{B-bazni} Bernsteinovih baznih polinomov opazimo, da je na intervalu $[0,1]$
+	izraz
+	$$b_{k,n}(x)= \binom nk x^k(1 - x)^{n - k} \geq 0$$
+	za vse $0 \leq k \leq n$.
 	Uporabimo to v računu
 
 	$$ B_n(x, f) = \sum_{k = 0}^n f\left(\frac kn\right)b_{k,n}(x) \leq 
 	\sum_{k = 0}^n g\left(\frac kn\right)b_{k,n}(x) = B_n(x, g)\text{,}$$
 
+\noindent
 	ki velja za vsak $x \in [0,1]$.
 \end{proof}
 
@@ -216,7 +216,7 @@ v dokazu glavnega izreka.
 	= \alpha \sum_{k = 0}^n f\left(\frac kn\right)b_{k,n}(x) + \beta \sum_{k = 0}^n b_{k,n}(x) =
 	\alpha B_n(x, f) + \beta\text{,}
 \end{multline*}
-kar velja za vse $x \in [0,1]$, pri čemer pa smo uporabili trditev \ref{razclenitev enote}.
+kar velja za vse $x \in [0,1]$, pri čemer smo uporabili trditev \ref{razclenitev enote}.
 \end{proof}
 
 \begin{primer}
@@ -231,10 +231,11 @@ $$
 torej, če obe strani pomnožimo s $\frac pn$, dobimo enačbo
 
 \begin{equation}
-	\sum_{k=0}^n \binom nk \frac kn p^k q^{n-k} = (p + q)^{n - 1}p\text{.}
+	\sum_{k=0}^n \binom nk \frac kn p^k q^{n-k} = p(p + q)^{n - 1}\text{.}
 	\label{eq:prviodvod}
 \end{equation}
 
+\noindent
 Če v to enačbo vstavimo $p = x$ in $q = 1 - x$ dobimo
 $$
 x = \sum_{k=0}^n \binom nk \frac kn x^k (1 - x)^{n-k} = 
@@ -275,8 +276,7 @@ Weierstrassov izrek, ter nato dokazali še resničnost prvega.
 \begin{izrek}[\textbf{Weierstrassov aproksimacijski izrek}]
 	\label{Weierstrass}
 	Za poljubno zvezno funkcijo $f: [a, b] \to \RR$ in poljubno natančnost $\epsilon > 0$
-	% pozitivno število ?
-	obstaja polinom $p$ na $[a,b]$ za katerega velja
+	obstaja polinom $p$ na $[a,b]$, za katerega velja
 
 	$$ \dinf(f, p) = \sup_{x \in [a, b]} |f(x)-p(x)| < \epsilon\text{.}$$
 	
@@ -286,19 +286,30 @@ Podajmo še Bernsteinov izrek.
 
 \begin{izrek}[\textbf{Bernstein}]
 	\label{Bernsteinov izrek}
-	Za poljubno zvezno funkcijo $f:[a, b] \to \RR$ zaporedje polinomov 
+	Za poljubno zvezno funkcijo $f:[0, 1] \to \RR$ zaporedje polinomov 
 	$(B_n(\text{- },f))_{n \in \NN}$ enakomerno konvergira
-	proti $f$ na $[a, b]$ oziroma
+	proti $f$ na $[0, 1]$, oziroma
 
 	$$ \lim_{n\to\infty}B_n(x, f) = f(x)$$
-
-	enakomerno na $[a,b]$.
+\noindent
+	enakomerno na $[0,1]$.
 \end{izrek}
 
 \begin{opomba*}
 	Pokažimo, da iz izreka \ref{Bernsteinov izrek} sledi izrek \ref{Weierstrass}.
+	Utemeljimo najprej, zakaj je dovolj obravnavati le primer, ko je $[a,b] = [0,1]$.
+	
+	Naj bo $g \in \mathcal{C}([a,b],\RR)$ poljubna zvezna funkcija. 
+	Definirajmo preslikavo \linebreak $\phi: [0,1] \to [a,b]$, podano s predpisom
+	$$ \phi(t) = (b - a)t + a \text{, }$$
+	ki je očitno homeomorfizem. Tedaj je funkcija $f = g \circ \phi$ zvezna in definirana
+	na $[0,1]$. Vidimo torej, da bomo lahko preko homeomorfizma $\phi$, zvezno funkcijo $g$
+	na $[a,b]$ enakomerno aproksimirali s polinomom natanko tedaj, ko bomo to lahko
+	storili s funkcijo $f = g \circ \phi$ na intervalu $[0,1]$, saj bo kompozicija polinoma
+	s $\phi$ oz. $\phi^{-1}$ še vedno polinom.
+
 	Izberimo si poljuben $\epsilon > 0$. Ker zaporedje polinomov 
-	$(B_n(\text{- },f))_{n \in \NN}$ enakomerno konvergira na $[a,b]$, obstaja tak 
+	$(B_n(\text{- },f))_{n \in \NN}$ enakomerno konvergira na $[0,1]$, obstaja tak 
 	$N \in \NN$, da za vse $x \in [a,b]$ in vse $n \geq N$ velja
 	$$ |B_n(x,f) - f(x)| < \epsilon\text{.}$$
 	Torej po definiciji metrike $\dinf$ za dobljeni $N$ velja
@@ -310,18 +321,18 @@ Podajmo še Bernsteinov izrek.
 \end{opomba*}
 
 \begin{proof}[Dokaz \emph{izreka \ref{Bernsteinov izrek}}]
+% \par
+% Izrek bomo dokazali za primer, ko je zaprti interval $[a,b] = [0,1]$. Pa utemeljimo
+% zakaj smemo to storiti. Naj bo $g \in \mathcal{C}([a,b],\RR)$ poljubna zvezna funkcija. 
+% Definirajmo preslikavo $\phi: [0,1] \to [a,b]$, podano s predpisom
+% $$ \phi(t) = (b - a)t + a \text{, }$$
+% ki je očitno homeomorfizem. Tedaj je funkcija $f = g \circ \phi$ zvezna in definirana
+% na $[0,1]$. Torej je res dovolj izrek dokazati za poljubno zvezno funkcijo $f \in \CIR$. 
 
 \par
-Izrek bomo dokazali za primer, ko je zaprti interval $[a,b] = [0,1]$. Pa utemeljimo
-zakaj smemo to storiti. Naj bo $g \in \mathcal{C}([a,b],\RR)$ poljubna zvezna funkcija. 
-Definirajmo preslikavo $\phi: [0,1] \to [a,b]$, podano s predpisom
-$$ \phi(t) = (b - a)t + a \text{, }$$
-ki je očitno homeomorfizem. Tedaj je funkcija $f = g \circ \phi$ zvezna in definirana
-na $[0,1]$. Torej je res dovolj izrek dokazati za poljubno zvezno funkcijo $f \in \CIR$. 
-
-\par
-Naj bo $f : [0,1] \to \RR$ zvezna funkcija. Dokazujemo $\lim_{n\to\infty}B_n(x, f) = f(x)$
-enakomerno na $[0,1]$, zato izberimo poljuben pozitiven $\epsilon > 0$. Najprej
+Naj bo $f : [0,1] \to \RR$ zvezna funkcija. Dokazujemo 
+$$\lim_{n\to\infty}B_n(x, f) = f(x)$$
+enakomerno na $[0,1]$, zato izberimo poljuben $\epsilon > 0$. Najprej
 omenimo nekaj opazk, ki takoj sledijo iz danih predpostavk.
 
 \par
@@ -339,7 +350,7 @@ $x, y \in [0,1]$ velja
 \end{equation}
 
 \par
-Izberimo si sedaj poljuben $\xi \in [0,1]$. Zaradi zveznosti $f$ tedaj za vsak
+Izberimo si sedaj poljuben $\xi \in [0,1]$. Zaradi \eqref{eq:enak.zv.} za vsak
 $x \in [0,1]$, za katerega velja $|x - \xi| < \delta$, velja tudi 
 $|f(x) - f(\xi)| < \frac{\epsilon}{2}$. Sicer pa, če je $x$ tak, da velja
 $|x - \xi| \geq \delta$, v tem primeru je seveda $|x - \xi|/\delta \geq 1$, dobimo
@@ -349,6 +360,7 @@ $|x - \xi| \geq \delta$, v tem primeru je seveda $|x - \xi|/\delta \geq 1$, dobi
 	2M\left(\frac{x - \xi}{\delta}\right)^2 + \frac{\epsilon}{2}\text{.}
 \end{equation}
 
+\noindent
 Zdaj združimo neenakosti \eqref{eq:enak.zv.} in \eqref{eq:druga moznost},
 in vidimo, da za vsak $x \in [0,1]$ velja
 
@@ -359,10 +371,10 @@ in vidimo, da za vsak $x \in [0,1]$ velja
 
 V naslednji račun bomo vpeljali Bernsteinove polinome, ki pa bodo zaenkrat še
 nedoločene stopnje $n$, kateri bomo pozneje podali dodatne omejitve. Po lemah 
-\ref{linearnost} in \ref{monotonost}, ki govorita o linearnosi in monotonosti 
+\ref{linearnost} in \ref{monotonost}, ki govorita o linearnosti in monotonosti 
 Bernsteinovih polinomov v drugem argumentu, dobimo
 \begin{align*}
-	|B_(x, f) - f(\xi)| &= |B_n(x, f - f(\xi))|\\
+	|B_n(x, f) - f(\xi)| &= |B_n(x, f - f(\xi))|\\
 	&\leq B_n(x, |f - f(\xi)|)\text{,}\\
 \intertext{
 		saj je $f - f(\xi) \leq |f - f(\xi)|$. In ker velja \eqref{eq:f neenakost}, sledi
@@ -379,16 +391,16 @@ tretjem lemo \ref{monotonost}. Iz primera \ref{B polinom primer} lahko izračuna
 	%&= x^2 + \frac{1}{n}(x - x^2) - 2\xi x + \xi^2 \\
 	&= (x - \xi)^2 + \frac{1}{n}(x - x^2)
 \end{align*}
-Če torej nadaljujemo z oceno in uporabimo zgornjo enakost dobimo
+Če torej nadaljujemo z oceno in uporabimo zgornjo enakost, dobimo
 $$
 |B_n(x, f) - f(\xi)| \leq \frac{2M}{\delta^2}(x - \xi)^2 + 
 \frac{2M}{\delta^2}\frac{1}{n}(x - x^2) + \frac{\epsilon}{2}\text{,}
 $$
-ki velja za vsak $x \in [0,1]$. Če v to enačbo vstavimo $x = \xi$ se ocena spremeni v
+ki velja za vsak $x \in [0,1]$. Če v to enačbo vstavimo $x = \xi$, se ocena spremeni v
 $$
 |B_n(\xi, f) - f(\xi)| \leq  \frac{2M}{n\delta^2}(\xi - \xi^2) + \frac{\epsilon}{2}\text{,}
 $$
-ki pravtako velja za vsak $\xi \in [0,1]$, saj smo na začetku izbrali poljubnega. Hitro
+ki prav tako velja za vsak $\xi \in [0,1]$, saj smo na začetku izbrali poljubnega. Hitro
 se prepričamo, da izraz $\xi - \xi^2$ na intervalu $[0,1]$ doseže maksimum v $\frac{1}{4}$
 in tako dobimo oceno
 $$
@@ -448,19 +460,22 @@ Weierstrassov izrek. To bomo storili v zadnjem zgledu.
 	ker imamo injektiven polinom $B_6(x, t \mapsto t) \equiv x$ in ta vedno loči točke.
 \end{zgled*}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Zaključek}
+
 \par
-Videli smo torej, da je mogoče in na kakšen način se podaja ekspliciten predpis polinoma, 
-ki je enakomerni približek poljubne zvezne funkcije na zaprtem intervalu. Izkaže pa se, 
+Videli smo torej, da je mogoče enakomerno aproksimirati zvezno funkcijo s polinomom na zaprtem intervalu in kako se podaja ekspliciten predpis takega polinoma. Izkaže pa se, 
 da ta metoda aproksimacije ni precej dobra. To pomeni, da je za dano natančnost potrebno
 podati polinom razmeroma visoke stopnje, oziroma da dano zaporedje Bernsteinovih
 polinomov dokaj počasi konvergira k iskani zvezni funkciji. Iz tega razloga se 
-Bernsteinovi polinomi niso prav zares uveljavili na področju aproksimiranja zveznih 
+Bernsteinovi polinomi niso prav zares uveljavili na področju praktičnega aproksimiranja zveznih 
 funkcij, so pa v svojem času skupaj z dokazom Weierstrassovega izreka izstopili 
 ravno zaradi svoje konstruktivistične narave.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \nocite{*}
-\newpage
+% \newpage
 \bibliographystyle{plain}
 
 \bibliography{literatura}
